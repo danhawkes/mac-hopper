@@ -1,0 +1,48 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/preference_group_rotation" >
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_rotate_enabled"
+            android:title="@string/preference_rotate_enabled_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="@string/pref_key_rotate_enabled"
+            android:key="@string/pref_key_rotate_when_screen_on"
+            android:summary="@string/preference_rotate_when_screen_on_summary"
+            android:title="@string/preference_rotate_when_screen_on_title" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="@string/pref_key_rotate_enabled"
+            android:key="@string/pref_key_rotate_when_wake_locked"
+            android:summary="@string/preference_rotate_when_wifi_wake_locked_summary"
+            android:title="@string/preference_rotate_when_wifi_wake_locked_title" />
+
+        <ListPreference
+            android:defaultValue="15"
+            android:dependency="@string/pref_key_rotate_enabled"
+            android:entries="@array/rotate_interval"
+            android:entryValues="@array/rotate_interval_values"
+            android:key="@string/pref_key_rotate_interval"
+            android:summary="@string/preference_rotate_interval_summary"
+            android:title="@string/preference_rotate_interval_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/preference_group_other" >
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_key_theme_light"
+            android:title="@string/preference_theme_title" />
+
+        <uk.co.danhawkes.machopper.ui.preferences.ContactPreference
+            android:summary="@string/preference_contact_summary"
+            android:title="@string/preference_contact_title" />
+
+        <uk.co.danhawkes.machopper.ui.preferences.DonatePreference
+            android:entries="@array/donate_group"
+            android:entryValues="@array/donate_group_values"
+            android:summary="@string/preference_donate_summary"
+            android:title="@string/preference_donate_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

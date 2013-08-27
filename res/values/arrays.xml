@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="rotate_interval">
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>20 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+    </string-array>
+    <string-array name="rotate_interval_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="donate_group">
+        <item>EFF</item>
+        <item>Open Rights Group</item>
+    </string-array>
+    <string-array name="donate_group_values">
+        <item>https://supporters.eff.org/donate</item>
+        <item>https://www.openrightsgroup.org/join/</item>
+    </string-array>
+
+</resources>

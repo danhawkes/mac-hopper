@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">MacHopper</string>
+    <string name="fragment_countdown_title">@string/app_name</string>
+    <string name="fragment_logs_title">Logs</string>
+    <string name="action_change_mac">Rotate MAC</string>
+    <string name="error_root_unavailable_title">Superuser unavailable</string>
+    <string name="error_root_unavailable_message">MacHopper was unable to gain superuser permissions. Please check you have enabled root access.</string>
+    <string name="mac_label">Current MAC</string>
+    <string name="progess_label">Time until next change</string>
+    <string name="action_preferences">Settings</string>
+    <string name="preference_group_rotation">Mac Rotation</string>
+    <string name="preference_group_other">Misc</string>
+    <string name="preference_contact_title">Contact</string>
+    <string name="preference_contact_email">machopper@danhawkes.co.uk</string>
+    <string name="preference_contact_summary">@string/preference_contact_email</string>
+    <string name="preference_contact_chooser_title">Send email</string>
+    <string name="preference_rotate_enabled_title">Enabled</string>
+    <string name="preference_rotate_when_screen_on_title">When screen on</string>
+    <string name="preference_rotate_when_screen_on_summary">Prevents temporary interruptions in connectivity when actively using the device</string>
+    <string name="preference_rotate_when_wifi_wake_locked_title">When WiFi wake locked</string>
+    <string name="preference_rotate_when_wifi_wake_locked_summary">Prevents temporary interruptions in connectivity when an application holds the WiFi wake lock</string>
+    <string name="preference_rotate_interval_title">Interval</string>
+    <string name="preference_rotate_interval_summary">How frequenctly the MAC is rotated</string>
+    <string name="preference_donate_title">Donate</string>
+    <string name="preference_donate_summary">Contribute to a group dedicated to protecting your privacy</string>
+    <string name="preference_theme_title">Light theme</string>
+    <string name="preference_theme_dialog_title">Restart app</string>
+    <string name="preference_theme_dialog_message">Changing the theme requires an app restart. Continue?</string>
+    <string name="pref_key_rotate_enabled">rotate_enabled</string>
+    <string name="pref_key_rotate_when_screen_on">rotate_mac_when_screen_on</string>
+    <string name="pref_key_rotate_when_wake_locked">rotate_mac_when_wake_locked</string>
+    <string name="pref_key_rotate_interval">rotate_interval</string>
+    <string name="pref_key_theme_light">theme_light</string>
+    <string name="action_help">Help</string>
+    <string name="help_text">"What does it do?\nWhy?\nWhat are the limitations?\n\nTODO: Write blurb\nMacHopper periodically modifies the MAC of your device's WiFi adapter to confuse would-be observers interested in tracking you as you travel in public spaces…"</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+</resources>
