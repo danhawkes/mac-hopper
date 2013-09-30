@@ -84,28 +84,15 @@ public class CountdownFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		requestRootAndShowErrorOnRejection();
-
+		AppSingleton.getBus().register(this);
 		uiHandler.sendEmptyMessage(UiHandler.INITIAL);
-
-		getActivity().registerReceiver(mMacChangedReceiver,
-				new IntentFilter(MacUtils.ACTION_MAC_CHANGED));
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		AppSingleton.getBus().unregister(this);
 		uiHandler.removeMessages(UiHandler.TICK);
-		getActivity().unregisterReceiver(mMacChangedReceiver);
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		uiHandler.removeMessages(UiHandler.TICK);
-		try {
-			getActivity().unregisterReceiver(mMacChangedReceiver);
-		} catch (Exception ignored) {
-		}
 	}
 
 	private static class UiHandler extends Handler {
@@ -138,13 +125,9 @@ public class CountdownFragment extends Fragment {
 		};
 	};
 
-	private final BroadcastReceiver mMacChangedReceiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
+	public void onEvent(MacChangedEvent event) {
 			uiHandler.sendEmptyMessage(UiHandler.INITIAL);
 		}
-	};
 
 	private void requestRootAndShowErrorOnRejection() {
 		if (!RootTools.isAccessGiven()) {

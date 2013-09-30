@@ -3,12 +3,12 @@ package uk.co.danhawkes.machopper.mac;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import uk.co.danhawkes.machopper.AppSingleton;
 import uk.co.danhawkes.machopper.Store;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.util.Log;
 
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.exceptions.RootDeniedException;
@@ -16,13 +16,23 @@ import com.stericson.RootTools.execution.CommandCapture;
 
 public class MacUtils {
 
-	private static final String TAG = MacUtils.class.getSimpleName();
 	private static final String COMMAND_TEMPLATE = "ip link set %1$s down; ip link set %1$s address %2$s; ip link set %1$s up";
-	public static final String ACTION_MAC_CHANGED = "MAC_CHANGED";
 	public static final String EXTRA_MAC = "MAC";
 
+	public static class MacChangedEvent {
+		private final Mac mac;
+
+		public MacChangedEvent(Mac mac) {
+			this.mac = mac;
+		}
+
+		public Mac getMac() {
+			return mac;
+		}
+	}
+
 	public static void setMac(final Mac mac, Context context, Store store) {
-		Log.d(TAG, "Setting mac...");
+		AppSingleton.getLogger().log("Set MAC to " + mac + ".");
 		try {
 			RootTools.getShell(true).add(getSetMacCommand("wlan0", mac)).waitForFinish();
 
@@ -30,9 +40,7 @@ public class MacUtils {
 			store.saveCurrentMac(mac);
 
 			// Send broadcast to update UI
-			Intent i = new Intent(ACTION_MAC_CHANGED);
-			i.putExtra(EXTRA_MAC, mac);
-			context.sendBroadcast(i);
+			AppSingleton.getBus().post(new MacChangedEvent(mac));
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
