@@ -39,24 +39,18 @@ public class Mac implements Parcelable {
 
 	@Override
 	public String toString() {
-		return toString(false, ':');
+		return toString(false, ":");
 	}
 
-	public String toString(boolean lowercase, char delimiter) {
+	public String toString(boolean lowercase, String delimiter) {
 		BaseEncoding encoder = BaseEncoding.base16();
+		if (delimiter != null) {
+			encoder = encoder.withSeparator(delimiter, 2);
+		}
 		if (lowercase) {
 			encoder = encoder.lowerCase();
 		}
-		String encodeHex = encoder.encode(mData);
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < mData.length; i++) {
-			sb.append(encodeHex.charAt(i));
-			sb.append(encodeHex.charAt(i + 1));
-			if (i < (mData.length - 1)) {
-				sb.append(delimiter);
-			}
-		}
-		return sb.toString();
+		return encoder.encode(mData);
 	}
 
 	public static Mac fromString(String macString) {

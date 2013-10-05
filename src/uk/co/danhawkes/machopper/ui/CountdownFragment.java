@@ -142,7 +142,7 @@ public class CountdownFragment extends Fragment {
 	}
 
 	private void updateDisplayedMac(Mac mac) {
-		macTextView.setText(mac.toString(true, ':'));
+		macTextView.setText(mac.toString(true, ":"));
 	}
 
 	private void updateProgressTime(long remaining, long interval) {
