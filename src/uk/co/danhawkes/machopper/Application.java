@@ -1,7 +1,6 @@
 package uk.co.danhawkes.machopper;
 
 import android.preference.PreferenceManager;
-import uk.co.danhawkes.machopper.R;
 
 public class Application extends android.app.Application {
 
