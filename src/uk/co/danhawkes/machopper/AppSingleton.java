@@ -10,6 +10,7 @@ public class AppSingleton {
 	private static Store store;
 	private static AlarmUtils alarmUtils;
 	private static SharedPreferences preferences;
+	private static Logger logger;
 	private static EventBus eventBus;
 
 	public static void initialise(Context context) {
@@ -17,6 +18,7 @@ public class AppSingleton {
 		AppSingleton.alarmUtils = new AlarmUtils(context, store);
 		AppSingleton.preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		AppSingleton.eventBus = new EventBus();
+		AppSingleton.logger = new Logger(context, eventBus);
 	}
 
 	public static Store getStore() {
@@ -29,6 +31,10 @@ public class AppSingleton {
 
 	public static SharedPreferences getPreferences() {
 		return preferences;
+	}
+
+	public static Logger getLogger() {
+		return logger;
 	}
 
 	public static EventBus getBus() {
