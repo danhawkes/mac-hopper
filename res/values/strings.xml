@@ -13,7 +13,7 @@
     <string name="preference_group_rotation">Mac Rotation</string>
     <string name="preference_group_other">Misc</string>
     <string name="preference_contact_title">Contact</string>
-    <string name="preference_contact_email">machopper@danhawkes.co.uk</string>
+    <string name="preference_contact_email">mac-hopper@danhawkes.co.uk</string>
     <string name="preference_contact_summary">@string/preference_contact_email</string>
     <string name="preference_contact_chooser_title">Send email</string>
     <string name="preference_rotate_enabled_title">Enabled</string>
