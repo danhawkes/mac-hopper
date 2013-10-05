@@ -7,15 +7,12 @@ import uk.co.danhawkes.machopper.AppSingleton;
 import uk.co.danhawkes.machopper.R;
 import uk.co.danhawkes.machopper.mac.Mac;
 import uk.co.danhawkes.machopper.mac.MacUtils;
+import uk.co.danhawkes.machopper.mac.MacUtils.MacChangedEvent;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -100,6 +97,7 @@ public class CountdownFragment extends Fragment {
 		public static final int INITIAL = 0;
 		public static final int TICK = 1;
 		private final WeakReference<CountdownFragment> mFragment;
+		private long lastRemaining = 0;
 
 		public UiHandler(CountdownFragment fragment) {
 			mFragment = new WeakReference<CountdownFragment>(fragment);
@@ -113,7 +111,10 @@ public class CountdownFragment extends Fragment {
 				long remaining = AppSingleton.getAlarmUtils().getTimeRemainingUntilNextAlarm();
 				long interval = AppSingleton.getAlarmUtils().getAlarmInterval();
 				fragment.updateProgressTime(remaining, interval);
-				fragment.updateProgressBar(remaining, interval);
+				if (remaining > lastRemaining) {
+					fragment.updateProgressBar(remaining, interval);
+				}
+				lastRemaining = remaining;
 				if (msg.what == INITIAL) {
 					fragment.updateDisplayedMac(MacUtils.getCurrentMac(fragment.getActivity(),
 							AppSingleton.getStore()));
@@ -126,8 +127,8 @@ public class CountdownFragment extends Fragment {
 	};
 
 	public void onEvent(MacChangedEvent event) {
-			uiHandler.sendEmptyMessage(UiHandler.INITIAL);
-		}
+		uiHandler.sendEmptyMessage(UiHandler.INITIAL);
+	}
 
 	private void requestRootAndShowErrorOnRejection() {
 		if (!RootTools.isAccessGiven()) {
@@ -161,7 +162,8 @@ public class CountdownFragment extends Fragment {
 	}
 
 	private void updateProgressBar(long remaining, long interval) {
-		int progress = (int) (10000.0f * (((float) remaining / (float) interval)));
+		long elapsed = interval - remaining;
+		int progress = (int) (1000.0f * (((float) elapsed) / (float) interval));
 		ObjectAnimator animator = ObjectAnimator.ofInt(progressBar, "progress", progress,
 				progressBar.getMax());
 		animator.setDuration(remaining);
